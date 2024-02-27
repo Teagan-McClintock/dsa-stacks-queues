@@ -1,9 +1,9 @@
 /** Does this string have balanced brackets? Returns true/false. */
 
 const PARENS = {
-  "(": ")",
-  "{": "}",
-  "[": "]",
+  ")": "(",
+  "}": "{",
+  "]": "[",
 }
 
 
@@ -18,28 +18,36 @@ function balancedBrackets(str: string): boolean {
     if (char === "(" || char === "{" || char === "[") {
       stack.unshift(char);
     }
+    else if (char === ")" || char === "}" || char === "]") {
+      if (stack.length === 0) return false;
+      else if (PARENS[char] === stack[0]) stack.shift();
+      else return false;
+    }
   }
+
+  if (stack.length === 0) return true;
+  return false;
   // now, we have a gorgeous array filled with wonderful open parens
 
   // we're in business: time to find the closed parens!
-  for (let openParens of stack) {
-    const idxOpen: number = str.lastIndexOf(openParens);
-    const babyStr: string = str.slice(idxOpen);
+  // for (let openParens of stack) {
+  //   const idxOpen: number = str.lastIndexOf(openParens);
+  //   const babyStr: string = str.slice(idxOpen);
 
-    for (let char of babyStr) {
-
-
-
-    }
-
-  }
+  //   for (let char of babyStr) {
 
 
+
+  //   }
+
+  // }
 
 
 
 
-  return false;
+
+
+  // return false;
 
   /**
    * we keep a count for each type: ( ) [ ] { }
